@@ -50,6 +50,7 @@ const translations = {
     contact: {
       title: "Contact & Appointments",
       subtitle: "We’re happy to take your message.",
+      mapCta: "Open in Google Maps",
       info: {
         phone: "Phone: +44 7366 474474",
         whatsapp: "WhatsApp: +44 7366 474474",
@@ -121,6 +122,7 @@ const translations = {
     contact: {
       title: "Contact & Programări",
       subtitle: "Așteptăm mesajul tău cu drag.",
+      mapCta: "Deschide in Google Maps",
       info: {
         phone: "Telefon: +44 7366 474474",
         whatsapp: "WhatsApp: +44 7366 474474",

@@ -1,23 +1,19 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
 
-export default function Contact({ lang, t, phone }) {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
-  const [sent, setSent] = useState(false);
-
-  function onChange(e) {
-    const { name, value } = e.target;
-    setForm((s) => ({ ...s, [name]: value }));
-  }
-
-  function onSubmit(e) {
-    e.preventDefault();
-    console.log("Contact form submitted:", form);
-    setSent(true);
-    setForm({ name: "", email: "", message: "" });
-    setTimeout(() => setSent(false), 4000);
-  }
+export default function Contact({ lang, t }) {
+  const addressText = t.contact.info.address || "";
+  const addressQuery = addressText
+    .replace(/^address:\s*/i, "")
+    .replace(/^adresă:\s*/i, "")
+    .replace(/^adresa:\s*/i, "");
+  const mapSrc = `https://www.google.com/maps?q=${encodeURIComponent(
+    addressQuery
+  )}&output=embed`;
+  const mapLink = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(
+    addressQuery
+  )}`;
 
   return (
     <section className="contact container">
@@ -36,32 +32,27 @@ export default function Contact({ lang, t, phone }) {
 
         </div>
 
-        {/* FORM */}
-        <form className="contact-form" onSubmit={onSubmit}>
-          <input
-            name="name"
-            placeholder={t.contact.form.name}
-            value={form.name}
-            onChange={onChange}
-          />
-          <input
-            name="email"
-            placeholder={t.contact.form.email}
-            value={form.email}
-            onChange={onChange}
-          />
-          <textarea
-            name="message"
-            placeholder={t.contact.form.message}
-            value={form.message}
-            onChange={onChange}
-          />
-          <button type="submit" className="btn-primary">
-            {t.contact.form.send}
-          </button>
-
-          {sent && <p className="form-success">{t.contact.form.success}</p>}
-        </form>
+        {/* MAP */}
+        <div className="contact-map" aria-label="Map">
+          <iframe
+            className="map-frame"
+            title="Map"
+            src={mapSrc}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          ></iframe>
+          <div className="map-actions">
+            <a
+              className="map-link"
+              href={mapLink}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {t.contact.mapCta}
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );

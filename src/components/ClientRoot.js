@@ -30,7 +30,12 @@ export default function ClientRoot({ children }) {
 
   return (
     <div className="site-root" data-lang={lang}>
-      <Header lang={lang} setLang={setLang} t={translations[lang]} />
+      <Header
+        lang={lang}
+        setLang={setLang}
+        t={translations[lang]}
+        phone={PHONE}
+      />
 
       <main>
         <section id="home">
@@ -46,7 +51,7 @@ export default function ClientRoot({ children }) {
         </section>
 
         <section id="contact">
-          <Contact lang={lang} t={translations[lang]} phone={PHONE} />
+          <Contact lang={lang} t={translations[lang]} />
         </section>
       </main>
 
